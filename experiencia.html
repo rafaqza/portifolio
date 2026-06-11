@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiência — Rafael Queiroz</title>
+
+  <!--
+  ## Fontes
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /*
+    ## Tokens de Design
+    */
+    :root {
+      --bg:        #0A0A0F;
+      --surface:   #1C1C24;
+      --border:    #2A2A36;
+      --accent:    #E8A840;
+      --text:      #F0EEE9;
+      --muted:     #7A7A8C;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --radius:    12px;
+      --max-w:     1100px;
+      --section-gap: 120px;
+    }
+
+    /*
+    ## Reset & Base
+    */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      cursor: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /*
+    ## Cursor Personalizado
+    */
+    #cursor {
+      position: fixed;
+      width: 12px; height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease;
+    }
+    #cursor.grow {
+      width: 40px; height: 40px;
+      background: transparent;
+      border: 2px solid var(--accent);
+    }
+
+    /*
+    ## Nav
+    */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: transparent;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); }
+
+    /*
+    ## Cabeçalho da Página
+    */
+    .page-header {
+      padding: 160px 40px 60px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .page-subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+    }
+
+    /*
+    ## Timeline
+    */
+    .experiencia-section {
+      padding: 0 40px var(--section-gap);
+    }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    .timeline { max-width: 680px; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 32px;
+      padding-bottom: 48px;
+      position: relative;
+    }
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 99px; top: 8px; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding-top: 4px;
+      text-align: right;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: 92px; top: 6px;
+      width: 14px; height: 14px;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+    }
+    .timeline-content h2 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .timeline-company {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .timeline-content p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /*
+    ## Animações de Entrada
+    */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /*
+    ## Footer
+    */
+    footer {
+      padding: 32px 40px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /*
+    ## Responsivo
+    */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .page-header { padding: 120px 20px 40px; }
+      .experiencia-section { padding: 0 20px 80px; }
+      .timeline-item { grid-template-columns: 70px 1fr; gap: 20px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ## Cursor Personalizado -->
+  <div id="cursor"></div>
+
+  <!--
+  ## Nav
+  -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">R<span>.</span>Q</a>
+    <ul class="nav-links">
+      <li><a href="index.html#sobre">Sobre</a></li>
+      <li><a href="projetos.html">Projetos</a></li>
+      <li><a href="experiencia.html" class="active">Experiência</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!--
+  ## Cabeçalho da Página
+  -->
+  <header class="page-header">
+    <p class="section-label">Trajetória</p>
+    <h1 class="section-title">Experiência</h1>
+    <p class="page-subtitle">Minha jornada acadêmica e profissional esta começando agora e com cada novidade vou manter-los atualizados.</p>
+  </header>
+
+  <!--
+  ## Timeline
+  ✏️ Repita `.timeline-item` para cada cargo ou formação.
+  -->
+  <main class="experiencia-section">
+    <div class="container">
+      <div class="timeline">
+
+        <div class="timeline-item reveal">
+          <span class="timeline-date">2026</span>
+          <div class="timeline-content">
+            <h2>Estudante do Primeiro Periodo</h2>
+            <p class="timeline-company">Cesar School</p>
+            <p>Inicio da minha jornada e ansioso para todas as oportunidades ainda por vir.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!--
+  ## Footer
+  -->
+  <footer>
+    <span>© 2026 Rafael Queiroz Alencar. Todos os direitos reservados.</span>
+    <span>Feito com HTML, CSS &amp; JS</span>
+  </footer>
+
+  <!--
+  ## JavaScript
+  -->
+  <script>
+    // ## 1. Cursor Personalizado
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+    });
+
+    // ## 2. Navbar — fica opaca ao rolar
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ## 3. Animações de Entrada (scroll reveal)
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer  = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      }),
+      { threshold: 0.15 }
+    );
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

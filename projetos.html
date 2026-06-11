@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projetos — Rafael Queiroz</title>
+
+  <!--
+  ## Fontes
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /*
+    ## Tokens de Design
+    */
+    :root {
+      --bg:        #0A0A0F;
+      --surface:   #1C1C24;
+      --border:    #2A2A36;
+      --accent:    #E8A840;
+      --text:      #F0EEE9;
+      --muted:     #7A7A8C;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --radius:    12px;
+      --max-w:     1100px;
+      --section-gap: 120px;
+    }
+
+    /*
+    ## Reset & Base
+    */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      cursor: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /*
+    ## Cursor Personalizado
+    */
+    #cursor {
+      position: fixed;
+      width: 12px; height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease;
+    }
+    #cursor.grow {
+      width: 40px; height: 40px;
+      background: transparent;
+      border: 2px solid var(--accent);
+    }
+
+    /*
+    ## Nav
+    */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: transparent;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a.active { color: var(--accent); }
+
+    /*
+    ## Página de Projetos
+    */
+    .page-header {
+      padding: 160px 40px 60px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .page-subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+    }
+
+    /*
+    ## Grid de Projetos
+    */
+    .projetos-section {
+      padding: 0 40px var(--section-gap);
+    }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    .projetos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .projeto-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      cursor: none;
+    }
+    .projeto-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+    .card-body { padding: 28px; }
+    .card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .card-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .card-tag + .card-tag::before { content: '·'; margin-right: 8px; color: var(--border); }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .card-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 24px; line-height: 1.65; }
+    .card-links { display: flex; gap: 16px; }
+    .card-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 5px;
+      transition: color 0.2s;
+    }
+    .card-link:hover { color: var(--accent); }
+
+    /*
+    ## Animações de Entrada
+    */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /*
+    ## Footer
+    */
+    footer {
+      padding: 32px 40px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /*
+    ## Responsivo
+    */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .page-header { padding: 120px 20px 40px; }
+      .projetos-section { padding: 0 20px 80px; }
+      .projetos-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ## Cursor Personalizado -->
+  <div id="cursor"></div>
+
+  <!--
+  ## Nav
+  -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">R<span>.</span>Q</a>
+    <ul class="nav-links">
+      <li><a href="index.html#sobre">Sobre</a></li>
+      <li><a href="projetos.html" class="active">Projetos</a></li>
+      <li><a href="experiencia.html">Experiência</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!--
+  ## Cabeçalho da Página
+  -->
+  <header class="page-header">
+    <p class="section-label">Trabalhos recentes</p>
+    <h1 class="section-title">Projetos em destaque</h1>
+    <p class="page-subtitle">Uma seleção dos projetos que desenvolvi durante minha trajetória na Cesar School.</p>
+  </header>
+
+  <!--
+  ## Grid de Projetos
+  ✏️ Repita `<article class="projeto-card">` para cada novo projeto.
+  -->
+  <main class="projetos-section">
+    <div class="container">
+      <div class="projetos-grid">
+
+        <article class="projeto-card reveal">
+          <div class="card-thumb" style="padding:0; overflow:hidden;">
+            <img src="nunca-encontrei.png" alt="Nunca encontrei ela..." style="width:100%; height:100%; object-fit:cover; display:block;">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag">Bitsy Color</span>
+            </div>
+            <h2 class="card-title">Nunca encontrei ela...</h2>
+            <p class="card-desc">
+              Jogo criado no Bitsy com a intenção de melhorar trabalho em equipe e melhorar lógica de programação.
+            </p>
+            <div class="card-links">
+              <a href="https://joao-miguel-r.itch.io/nunca-encontrei-ela" target="_blank" class="card-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8l4 4-4 4"/></svg>
+                Bitsy
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="projeto-card reveal">
+          <div class="card-thumb" style="padding:0; overflow:hidden;">
+            <img src="fit-plan.png" alt="FitPlanner" style="width:100%; height:100%; object-fit:cover; display:block;">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag">HTML</span>
+              <span class="card-tag">API</span>
+              <span class="card-tag">Python</span>
+              <span class="card-tag">JS</span>
+            </div>
+            <h2 class="card-title">FitPlanner</h2>
+            <p class="card-desc">
+              Um site interativo programado com Python, HTML e JavaScript para todos que querem focar na academia esse ano.
+            </p>
+            <div class="card-links">
+              <a href="https://github.com/Miguel-1406/FITPLANNER" target="_blank" class="card-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="projeto-card reveal">
+          <div class="card-thumb" style="padding:0; overflow:hidden;">
+            <img src="fuga-vulcao.jpeg" alt="Fuga da Ilha Vulcânica" style="width:100%; height:100%; object-fit:cover; display:block;">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag">C++</span>
+              <span class="card-tag">Arduino</span>
+            </div>
+            <h2 class="card-title">Fuga da Ilha Vulcanica</h2>
+            <p class="card-desc">
+              Maior projeto do primeiro periodo no Cesar School, simulando como seria trabalhar para uma empresa real e coçar a cabeça com suas demandas.
+            </p>
+            <div class="card-links">
+              <a href="https://sites.google.com/d/14pFlMvvaz5Ci437vCdu3WfFUdVuJPVKK/p/12Me5mPuusjMul7PAyrfRcN4U7pvu-qG4/edit?pli=1" target="_blank" class="card-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="17" y1="7" x2="7" y2="17"/><polyline points="7 7 7 17 17 17"/></svg>
+                Ver site
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <!--
+  ## Footer
+  -->
+  <footer>
+    <span>© 2026 Rafael Queiroz Alencar. Todos os direitos reservados.</span>
+    <span>Feito com HTML, CSS &amp; JS</span>
+  </footer>
+
+  <!--
+  ## JavaScript
+  -->
+  <script>
+    // ## 1. Cursor Personalizado
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .projeto-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+    });
+
+    // ## 2. Navbar — fica opaca ao rolar
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ## 3. Animações de Entrada (scroll reveal)
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer  = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      }),
+      { threshold: 0.15 }
+    );
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
