@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seu Nome — Portfólio</title>
-  
+
   <!--
-  ## Editado com comentarios estilo Markdown
   ## Fontes
   Troque as famílias abaixo se quiser outro estilo tipográfico.
   -->
@@ -330,7 +329,7 @@
     /*
     ## Experiência
     */
-    #experiencia { background: var(--surface); }
+
 
     .timeline { max-width: 680px; }
 
@@ -439,8 +438,8 @@
     <a href="#hero" class="nav-logo">R<span>.</span>Q</a>
     <ul class="nav-links">
       <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#projetos">Projetos</a></li>
-      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="projetos.html">Projetos</a></li>
+      <li><a href="experiencia.html">Experiência</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
   </nav>
@@ -464,7 +463,7 @@
       </p>
 
       <div class="hero-cta">
-        <a href="#projetos" class="btn btn-primary">Ver projetos</a>
+        <a href="projetos.html" class="btn btn-primary">Ver projetos</a>
         <a href="#contato" class="btn btn-ghost">Entrar em contato</a>
       </div>
     </div>
@@ -508,110 +507,7 @@
     </div>
   </section>
 
-  <!--
-  ## Projetos
-  ✏️ Repita o bloco `<article class="projeto-card">` para cada novo projeto.
-  -->
-  <section id="projetos">
-    <div class="container">
-      <p class="section-label">Trabalhos recentes</p>
-      <h2 class="section-title">Projetos em destaque</h2>
 
-      <div class="projetos-grid">
-
-        <article class="projeto-card reveal">
-          <div class="card-thumb" style="padding:0; overflow:hidden;">
-            <img src="nunca-encontrei.png" alt="Nunca encontrei ela..." style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="card-tag">Bitsy Color</span>
-            </div>
-            <h3 class="card-title">Nunca encontrei ela...</h3>
-            <p class="card-desc">
-              Jogo criado no Bitsy com a intenção de melhorar trabalho em equipe e melhorar lógica de programação.
-            </p>
-            <div class="card-links">
-              <a href="https://joao-miguel-r.itch.io/nunca-encontrei-ela" target="_blank" class="card-link">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8l4 4-4 4"/></svg>
-                Bitsy
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <article class="projeto-card reveal">
-          <div class="card-thumb" style="padding:0; overflow:hidden;">
-            <img src="fit-plan.png" alt="FitPlanner" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="card-tag">HTML</span>
-              <span class="card-tag">API</span>
-              <span class="card-tag">Python</span>
-              <span class="card-tag">JS</span>
-            </div>
-            <h3 class="card-title">FitPlanner</h3>
-            <p class="card-desc">
-              Um site interativo programado com Python, HTML e JavaScript para todos que querem focar na academia esse ano.
-            </p>
-            <div class="card-links">
-              <a href="https://github.com/Miguel-1406/FITPLANNER" target="_blank" class="card-link">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <article class="projeto-card reveal">
-          <div class="card-thumb" style="padding:0; overflow:hidden;">
-            <img src="fuga-vulcao.jpeg" alt="Fuga da Ilha Vulcânica" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="card-tag">C++</span>
-              <span class="card-tag">Arduino</span>
-            </div>
-            <h3 class="card-title">Fuga da Ilha Vulcanica</h3>
-            <p class="card-desc">
-              Maior projeto do primeiro periodo no Cesar School, simulando como seria trabalhar para uma empresa real e coçar a cabeça com suas demandas.
-            </p>
-            <div class="card-links">
-              <a href="https://sites.google.com/d/14pFlMvvaz5Ci437vCdu3WfFUdVuJPVKK/p/12Me5mPuusjMul7PAyrfRcN4U7pvu-qG4/edit?pli=1" target="_blank" class="card-link">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="17" y1="7" x2="7" y2="17"/><polyline points="7 7 7 17 17 17"/></svg>
-              </a>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!--
-  ## Experiência
-  ✏️ Repita `.timeline-item` para cada cargo ou formação.
-  -->
-  <section id="experiencia">
-    <div class="container">
-      <p class="section-label">Trajetória</p>
-      <h2 class="section-title">Experiência</h2>
-
-      <div class="timeline">
-
-        <div class="timeline-item reveal">
-          <span class="timeline-date">2026</span>
-          <div class="timeline-content">
-            <h3>Estudante do Primeiro periodo</h3>
-            <p class="timeline-company">Cesar School</p>
-            <p>Inicio da minha jornada e ansioso para todas as oportunidades ainda por vir.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!--
   ## Contato
@@ -623,7 +519,7 @@
         <p class="section-label">Vamos conversar</p>
         <h2 class="section-title">Tem um projeto em mente?</h2>
         <p class="contato-sub">
-          Ainda estou no começo da minha trajetoria mas aberto a todas as oportunidades. Me manda uma mensagem!
+          Estou ainda no começo da minha trajetoria mas aberto a todas as oportunidades. Me manda uma mensagem!
         </p>
         <a href="mailto:seuemail@email.com" class="btn btn-primary" style="font-size:1rem; padding: 16px 36px;">
           rafaqza@email.com
@@ -714,4 +610,3 @@
   </script>
 </body>
 </html>
-
